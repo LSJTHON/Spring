@@ -29,6 +29,7 @@
 		<property name="dataSource" ref="dataSource"></property>
 	 </bean>
 	 
+	 <mybatis-spring:scan base-package="com.codehows.mapper"/>
 	 <context:component-scan base-package="com.codehows.sample">
    </context:component-scan> 
 </beans>
