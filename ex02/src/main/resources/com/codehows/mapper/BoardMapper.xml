@@ -18,8 +18,11 @@
 			select seq_board.nextval from dual
 		</selectKey>
 		insert into tbl_board (bno,title,content,writer)
-		values (#{bno}, #{title}, #{content}, #{writer}) 
+		values (#{bno}, #{title}, #{content}, #{writer})
 		<!-- boardVO 안에 있는 값을 호출 -->
 	</insert>
 	
+	<select id = "read" resultType="com.codehows.domain.BoardVO">
+		select * from tbl_board where bno = #{bno}
+	</select>
 </mapper>
