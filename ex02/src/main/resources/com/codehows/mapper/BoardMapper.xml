@@ -6,4 +6,20 @@
 	<select id = "getList" resultType="com.codehows.domain.BoardVO">
 		<![CDATA[select * from tbl_board where bno > 0]]>
 	</select>
+	<insert id = "insert">
+		insert into tbl_board (bno,title,content,writer)
+		values (seq_board.nextval, #{title},#{content},#{writer}) 
+		<!-- boardVO 안에 있는 값을 호출 -->
+	</insert>
+	
+	<insert id = "insertSelectKey">
+		<!-- DB 아넹 있는 키 값을 반환 -->
+		<selectKey keyProperty="bno" order = "BEFORE" resultType="long">
+			select seq_board.nextval from dual
+		</selectKey>
+		insert into tbl_board (bno,title,content,writer)
+		values (#{bno}, #{title}, #{content}, #{writer}) 
+		<!-- boardVO 안에 있는 값을 호출 -->
+	</insert>
+	
 </mapper>
