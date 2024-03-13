@@ -25,4 +25,9 @@
 	<select id = "read" resultType="com.codehows.domain.BoardVO">
 		select * from tbl_board where bno = #{bno}
 	</select>
+	
+	<delete id = "delete">
+		delete from tbl_board where bno = #{bno}
+	</delete>
+	
 </mapper>
