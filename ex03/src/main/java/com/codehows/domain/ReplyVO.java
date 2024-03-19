@@ -2,6 +2,9 @@ package com.codehows.domain;
 
 import java.util.Date;
 
+import lombok.Data;
+
+@Data
 public class ReplyVO {
 	private Long rno;
 	private Long bno;
