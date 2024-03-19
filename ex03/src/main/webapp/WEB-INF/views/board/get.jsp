@@ -14,13 +14,27 @@
 	
 	var bnoValue = '<c:out value ="${board.bno}"/>';
 	
-	replyService.add(
+	/* replyService.add(
 		{reply:"JS Test",replyer:"tester",bno:bnoValue}
 		,
 		function(result){
 			alert("RESULT: "+result);
 		}
-	);
+	); */
+	/* replyService.getList({bno:bnoValue, page:1},function(list){
+		for(var i = 0, len=list.length || 0; i<len; i++){
+			console.log(list[i]);
+		}
+	}); */
+	
+	replyService.remove(12, function(count){
+		console.log(count);
+		if(count === "success"){
+			alert("REMOVED");
+		}
+	}, function(err){
+		alert('error...');
+	});
 	
 </script>
 
