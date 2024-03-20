@@ -19,7 +19,7 @@ public class Criteria {
 	
 	
 	public Criteria() {
-		this(1,10);
+		this(2,10);
 	}
 	public Criteria(int pageNum, int amount) {
 		this.pageNum = pageNum;
