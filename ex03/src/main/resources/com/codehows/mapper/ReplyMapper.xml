@@ -26,6 +26,6 @@
 		select rno, bno, reply, replyer, replyDate, updatedate
 		from tbl_reply
 		where bno = #{bno}
-		order by rno asc
+		order by rno desc
 	</select>
 </mapper>
