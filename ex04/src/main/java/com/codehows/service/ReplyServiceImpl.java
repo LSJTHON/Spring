@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.codehows.domain.Criteria;
 import com.codehows.domain.ReplyPageDTO;
 import com.codehows.domain.ReplyVO;
+import com.codehows.mapper.BoardMapper;
 import com.codehows.mapper.ReplyMapper;
 
 import lombok.Setter;
@@ -18,16 +20,32 @@ public class ReplyServiceImpl implements ReplyService{
 	@Setter(onMethod_ = @Autowired)
 	private ReplyMapper mapper;
 	
+	@Setter(onMethod_ = @Autowired)
+	private BoardMapper boardMapper;
+	
+//	@Override
+//	public int register(ReplyVO vo) {
+//		log.info("앙 기모띠....."+vo);
+//		return mapper.insert(vo);
+//	}
+	
+	@Transactional
 	@Override
 	public int register(ReplyVO vo) {
-		log.info("앙 기모띠....."+vo);
+		log.info("register......"+vo);
+		
+		boardMapper.updateReplyCnt(vo.getBno(), 1);
+		
 		return mapper.insert(vo);
 	}
+	
+	
 	@Override
 	public ReplyVO get(Long rno) {
 		log.info("get......."+rno);
 		return mapper.read(rno);
 	}
+	
 	
 	@Override
 	public int modify(ReplyVO vo) {
@@ -35,11 +53,23 @@ public class ReplyServiceImpl implements ReplyService{
 		return mapper.update(vo);
 	}
 	
+	@Transactional
 	@Override
 	public int remove(Long rno) {
 		log.info("delete......."+rno);
+		
+		ReplyVO vo = mapper.read(rno);
+		
+		boardMapper.updateReplyCnt(vo.getBno(), -1);
 		return mapper.delete(rno);
 	}
+	
+	
+//	@Override
+//	public int remove(Long rno) {
+//		log.info("delete......."+rno);
+//		return mapper.delete(rno);
+//	}
 	
 	@Override
 	public List<ReplyVO> getList(Criteria cri, Long bno){
@@ -53,5 +83,7 @@ public class ReplyServiceImpl implements ReplyService{
 				mapper.getCountByBno(bno),
 				mapper.getListWithPaging(cri, bno));
 	}
+	
+	
 	
 }

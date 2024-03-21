@@ -2,6 +2,7 @@ package com.codehows.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import com.codehows.domain.BoardVO;
 import com.codehows.domain.Criteria;
@@ -23,4 +24,5 @@ public interface BoardMapper {
 	public int update(BoardVO board);
 	
 	public int getTotalCount(Criteria cri);
+	public void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount);
 }
