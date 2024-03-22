@@ -5,14 +5,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.codehows.domain.AttachFileDTO;
 
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -50,11 +58,16 @@ public class UploadController {
 		log.info("upload Ajax");
 	}
 	
-	@PostMapping("/uploadAjaxAction")
-	public void uploadAjaxPost(MultipartFile[] uploadFile) {
+	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.
+			APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile){
 		log.info("upload ajax post............");
 		
-		String uploadFolder = "C:\\upload/temp";
+		List<AttachFileDTO> list = new ArrayList<>();
+		String uploadFolder = "C:\\upload";
+		
+		String uploadFolderPath = getFolder();
 		
 		//make folder ----------
 		File uploadPath = new File(uploadFolder, getFolder());
@@ -67,9 +80,12 @@ public class UploadController {
 		
 		
 		for(MultipartFile multipartFile : uploadFile){
-			log.info("=========================");
-			log.info("Upload File Name: "+multipartFile.getOriginalFilename());
-			log.info("Upload File Size: "+multipartFile.getSize());
+			
+			AttachFileDTO attachDTO = new AttachFileDTO();
+			
+//			log.info("=========================");
+//			log.info("Upload File Name: "+multipartFile.getOriginalFilename());
+//			log.info("Upload File Size: "+multipartFile.getSize());
 
 			String uploadFileName = multipartFile.getOriginalFilename();
 			
@@ -88,16 +104,24 @@ public class UploadController {
 				
 				multipartFile.transferTo(saveFile);
 				
+				attachDTO.setUuid(uuid.toString());
+				attachDTO.setUploadPath(uploadFolderPath);
+				
 				if(checkImageType(saveFile)) {
+					
+					attachDTO.setImage(true);
+					
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_"+uploadFileName));
 					
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail,100,100);
 					thumbnail.close();
 				}
+				list.add(attachDTO);
 			}catch(Exception e) {
 				log.error(e.getMessage());
 			} // end catch
 		}	// end for
+		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 	
 	private String getFolder() {
