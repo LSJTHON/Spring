@@ -50,6 +50,11 @@
       crossorigin="anonymous"></script>
    
    <script>
+   		function showImage(fileCallPath){
+   			alert(fileCallPath);
+   		}
+   
+   
       $(document).ready(function() {
          
          var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
@@ -125,14 +130,19 @@
             		
             		var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_"+obj.uuid+"_"+obj.fileName);
             		
+					var originPath = obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName;
 					
+					originPath = originPath.replace(new RegExp(/\\/g),"/");
             		
-            		str+= "<li><img src='/display?fileName="+fileCallPath+"'></li>";
+					str += "<li><a href=\"javascript:showImage('" + originPath + "')\"><img src='/display?fileName=" + fileCallPath + "'></a></li>";					
+            		//str+= "<li><img src='/display?fileName="+fileCallPath+"'></li>";
             	}
             	
             });
             uploadResult.append(str);
          }
+         
+         
       });
       
    </script>
