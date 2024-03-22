@@ -37,8 +37,12 @@
 				}
 				return true;
 			}
+			//초기상태를 복제
+			var cloneObj = $(".uploadDiv").clone();
 			
-			
+			$("#uploadBtn").on("click",function(e){
+				var formData = new FormData();
+			});
 			
 			$("#uploadBtn").on("click",function(e){
 				var formData = new FormData();
@@ -65,6 +69,9 @@
 					dataType:'json',
 					success : function(result){
 						console.log(result);
+						
+						//초기화된 부분을 덮어쓰기 -> 초기 상태로 변경
+						$(".uploadDiv").html(cloneObj.html());
 					}
 				}); //$.ajax
 			});
