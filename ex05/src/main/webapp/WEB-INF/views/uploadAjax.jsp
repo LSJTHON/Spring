@@ -24,7 +24,7 @@
 		$(document).ready(function(){
 			
 			var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-			var maxSize = 5242880; //5MB
+			var maxSize = 52428800; //50MB
 			
 			function checkExtension(fileName, fileSize){
 				if(fileSize >= maxSize){
