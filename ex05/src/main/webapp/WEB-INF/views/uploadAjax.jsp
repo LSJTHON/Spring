@@ -101,6 +101,23 @@
             }, 1000);
          });
    		
+   		$(".uploadResult").on("click","span", function(e){
+   			var targetFile = $(this).data("file");
+   			var type = $(this).data("type");
+   			console.log(targetFile);
+   			
+   			$.ajax({
+   				url : '/deleteFile',
+   				data:{fileName : targetFile, type:type},
+   				dataType:'text',
+   				type:'POST',
+   				success : function(result){
+   					alert(result);
+   				}
+   			}); //$.ajax
+   			
+   		});
+   		
    		
       $(document).ready(function() {
          
@@ -169,8 +186,11 @@
             		var fileCallPath = encodeURIComponent( obj.uploadPath +"/"+ 
             				obj.uuid+"_"+obj.fileName);
             		
-            		str+= "<li><a href ='/download?fileName="+fileCallPath+"'>"
-    				+"<img src='/resources/img/attach.png'>"+obj.fileName+"</a></li>";
+            		var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+            		
+            		str += "<li><a href='/download?fileName=" + fileCallPath + "'>" +
+            	       "<img src='/resources/img/attach.png'>" + obj.fileName + "</a>" +
+            	       "<span data-file=\'" + fileCallPath + "\' data-type='file'> x </span></div></li>";
             	}else{
             		//str += "<li>" + obj.fileName + "</li>";
             		
@@ -181,7 +201,9 @@
 					
 					originPath = originPath.replace(new RegExp(/\\/g),"/");
             		
-					str += "<li><a href=\"javascript:showImage('" + originPath + "')\"><img src='/display?fileName=" + fileCallPath + "'></a></li>";					
+					str += "<li><a href=\"javascript:showImage('" + originPath + "')\">" +
+				       "<img src='/display?fileName=" + fileCallPath + "'></a>" +
+				       "<span data-file=\'" + fileCallPath + "\' data-type='image'> x </span></div></li>";				
             		//str+= "<li><img src='/display?fileName="+fileCallPath+"'></li>";
             	}
             	
@@ -189,7 +211,6 @@
             uploadResult.append(str);
          } 
       });
-      
    </script>
 </body>
 </html>
