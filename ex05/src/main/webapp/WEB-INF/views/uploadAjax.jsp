@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 
+<div class='bigPictureWrapper'>
+	<div class='bigPicture'>
+	</div>
+</div>
+
 <style>
 	.uploadResult{
 		width:100%;
@@ -22,12 +27,42 @@
 	.uploadResult ul li {
 		list-style : none;
 		padding : 10px;
+		align-content : center;
+		text-align : center;
 	}
 	
 	.uploadResult ul li img{
 		width: 100px;
 	}
 	
+	.uploadResult ul li span {
+    	color: white;
+	}
+
+	.bigPictureWrapper {
+	    position: absolute;
+	    display: none;
+	    justify-content: center;
+	    align-items: center;
+	    top: 0%;
+	    width: 100%;
+	    height: 100%;
+	    background-color : gray;
+	    z-index: 100;
+	    background : rgba(122, 122, 122, 0.5); /* 투명도 설정 */
+
+	}
+	
+	.bigPicture {
+	    position: relative;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	}
+	
+	.bigPicture img {
+	    width: 600px;
+	}
 </style>
 
 <body>
@@ -51,10 +86,22 @@
    
    <script>
    		function showImage(fileCallPath){
-   			alert(fileCallPath);
+   			//alert(fileCallPath);
+   			$(".bigPictureWrapper").css("display","flex").show();
+   			
+   			$(".bigPicture")
+   			.html("<img src = '/display?fileName="+encodeURI(fileCallPath)+"'>")
+   			.animate({width:'100%',height:'100%'}, 1000);
    		}
    
-   
+   		$(".bigPictureWrapper").on("click", function(e) {
+            $(".bigPicture").animate({width: '0%', height: '0%'}, 1000);
+            setTimeout(() => {
+               $(this).hide();
+            }, 1000);
+         });
+   		
+   		
       $(document).ready(function() {
          
          var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
@@ -140,9 +187,7 @@
             	
             });
             uploadResult.append(str);
-         }
-         
-         
+         } 
       });
       
    </script>
