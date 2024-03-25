@@ -14,7 +14,7 @@
 	</delete>
 	
 	
-	<select id="findByBno" resultType="com.codehows.domaon.BoardAttachVO">
+	<select id="findByBno" resultType="com.codehows.domain.BoardAttachVO">
 		select * from tbl_attach where bno = #{bno}
 	</select>
 </mapper>
