@@ -203,9 +203,12 @@ public class UploadController {
 		   file = new File("c:\\upload\\"+URLDecoder.decode(fileName, "UTF-8"));
 		   
 		   file.delete();
+		   System.out.println("이미지 타입"+type);
+		   System.out.println("썸넬 이미지명"+file);
+		   System.out.println("원본 이미지명"+file.getAbsolutePath().replace("s_", ""));
 		   if(type.equals("image")) {
-			   //String largeFileName = file.getAbsolutePath().replace("s_", "");
-			   String largeFileName = "c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8").replace("s_", "");
+			   String largeFileName = file.getAbsolutePath().replace("s_", "");
+			   //String largeFileName = "c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8").replace("s_", "");
 			   log.info("largeFileName: "+largeFileName);
 			   
 			   file = new File(largeFileName);

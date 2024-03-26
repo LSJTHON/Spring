@@ -134,18 +134,10 @@
 					str += " data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "'";
 					str += " ><div>";
 					str += "<button type='button' data-file=\'" + fileCallPath + "\' ";
-					str += "data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+					str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
 					str += "<img src='/display?fileName=" + fileCallPath + "'>";
 					str += "</div>";
 					str += "</li>";
-
-					/* str += "<li><div>";
-					str += "<span> "+obj.fileName +"</span>";
-					str += "<button type='button' data-file=\'" + fileCallPath + 
-					"\' data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-					str += "<img src = '/display?fileName="+fileCallPath+"'>";
-					str += "</div>";
-					str += "</li>"; */
             	}else{
             		var fileCallPath = encodeURIComponent( obj.uploadPath +"/"+ 
             				obj.uuid+"_"+obj.fileName);
@@ -160,14 +152,6 @@
             		str += "<img src='/resources/img/attach.png'>";
             		str += "</div>";
             		str += "</li>";
-            			
-            		/* str += "<li><div>";
-            		str += "<span> "+obj.fileName +"</span>";
-            		str += "<button type='button' data-file=\'" + fileCallPath + 
-					"\' data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-					str += "<img src='/resources/img/attach.png'>";
-					str += "</div>";
-					str += "</li>"; */
             	}
 			});
 			uploadUL.append(str);
