@@ -6,7 +6,7 @@ import com.codehows.domain.BoardAttachVO;
 import com.codehows.domain.BoardVO;
 import com.codehows.domain.Criteria;
 
-
+//BoardServiceImpl 에 기능들이 구현되어 있다.
 public interface BoardService {
 	public void register(BoardVO board); //글 등록
 	
@@ -23,4 +23,5 @@ public interface BoardService {
 	public int getTotal(Criteria cri);
 	
 	public List<BoardAttachVO> getAttachList(Long bno);
+
 }

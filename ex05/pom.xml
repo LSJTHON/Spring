@@ -97,6 +97,20 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- quartz-->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		
+		<!-- quartz-scheduler-->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-jobs</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
 		<!-- gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

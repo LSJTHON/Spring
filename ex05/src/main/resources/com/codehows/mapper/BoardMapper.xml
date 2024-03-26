@@ -66,7 +66,7 @@
 	</insert>
 	
 	<insert id = "insertSelectKey">
-		<!-- DB 아넹 있는 키 값을 반환 -->
+		<!-- DB 안에 있는 키 값을 반환 -->
 		<selectKey keyProperty="bno" order = "BEFORE" resultType="long">
 			select seq_board.nextval from dual
 		</selectKey>
@@ -96,6 +96,8 @@
 		update tbl_board set replycnt = replycnt + #{amount} where bno = #{bno}
 	</update>
 	
-	
+	<delete id = "deleteResult">
+		delete from tbl_reply where bno = #{bno}
+	</delete>
 	
 </mapper>

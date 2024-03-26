@@ -25,4 +25,7 @@ public interface BoardMapper {
 	
 	public int getTotalCount(Criteria cri);
 	public void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount);
+
+	//게시물 삭제를 위한 댓글 삭제 댓글이 있으면 기본키의 제약조건 때문에 삭제 불가능
+	public void deleteResult(Long bno);
 }

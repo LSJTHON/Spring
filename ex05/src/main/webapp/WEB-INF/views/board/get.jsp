@@ -5,10 +5,8 @@
 
 
 <%@ include file="../includes/header.jsp"%>
-<div class = 'bigPictureWrapper'>
-	<div class = 'bigPicture'>
-	</div>
-</div>
+
+<div class = 'bigPictureWrapper'><div class = 'bigPicture'></div></div> <!-- 첨부파일 css 및 기능은 style, script에서 구현 -->
 <style>
 	.uploadResult{
 		width:100%;
@@ -70,8 +68,10 @@
 		(function(){
 			var bno = '<c:out value = "${board.bno}"/>';
 			
+			
 			$.getJSON("/board/getAttachList", {bno: bno}, function(arr){
-				console.log(arr);
+				
+				console.log(arr); //게시물 번호에 대한 첨부파일 정보 출력
 				
 				var str = "";
 				
@@ -238,6 +238,7 @@
 			});
 		});
 		
+		//modify버튼을 클릭시 게시물의 삭제 버튼 활성화
 		modalRemoveBtn.on("click",function(e){
 			var rno = modal.data("rno");
 			

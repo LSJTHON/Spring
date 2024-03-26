@@ -28,21 +28,26 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Transactional
 	@Override
-	public void register(BoardVO board) {
-
+	public void register(BoardVO board) { //인터페이스는 BoardService에 온다.
+	
       log.info("register......" + board);
 
+      
+      //insertSelectKey는 BoardMapper.xml이랑 mybatis로 인해 연결되어 실행됨.
+      //그리고 insertSelectKey는 mybatis안에서 bno값을 return 해줌.
+      //mapper.insertSelectKey(board); 
       mapper.insertSelectKey(board);
+      
       if(board.getAttachList() == null || board.getAttachList().size() <= 0) {
     	  return;
       }
+      
+      
       board.getAttachList().forEach(attach -> {
     	  attach.setBno(board.getBno());
     	  attachMapper.insert(attach);
       });
    }
-	
-	
 	
 
    @Override
@@ -53,25 +58,37 @@ public class BoardServiceImpl implements BoardService {
       return mapper.read(bno);
 
    }
-
+   @Transactional
    @Override
    public boolean modify(BoardVO board) {
 
       log.info("modify......" + board);
+      
+      attachMapper.deleteAll(board.getBno());
+      
+      boolean modifyResult = mapper.update(board) == 1;
+      
+      if(modifyResult && board.getAttachList() != null && board.getAttachList().size() > 0) {
+    	  board.getAttachList().forEach(attach -> {
+    		  attach.setBno(board.getBno());
+    		  attachMapper.insert(attach);
+    	  });
+      }
 
-      return mapper.update(board) == 1;
+      //return mapper.update(board) == 1;
+      return modifyResult;
    }
 
    
    @Transactional
    @Override
    public boolean remove(Long bno) {
-
-      log.info("remove...." + bno);
-
-      attachMapper.deleteAll(bno);
+	   
+	   log.info("remove...." + bno);
       
-      return mapper.delete(bno) == 1;
+	   attachMapper.deleteAll(bno);
+	   mapper.deleteResult(bno);
+	   return mapper.delete(bno) == 1;
    }
 
    @Override
