@@ -136,9 +136,7 @@
 						str += "<img src='/display?fileName=" + fileCallPath + "'>";
 						str += "</div>";
 						str += "</li>";
-
 					}else{
-						
 						var fileCallPath = encodeURIComponent( attach.uploadPath +"/"+ 
 		        				attach.uuid+"_"+attach.fileName);
 		        		
@@ -170,7 +168,7 @@
 		});
 		
 		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-		var maxSize = 5242880; //50mb;
+		var maxSize = 5242880; //5mb;
 		
 		function checkExtension(fileName, fileSize){
 			if(fileSize >= maxSize){
@@ -209,10 +207,10 @@
 		});
 		
 		function showUploadResult(uploadResultArr){
+			
 			if(!uploadResultArr || uploadResultArr.length == 0){return;}
 			
 			var uploadUL = $(".uploadResult ul");
-			
 			var str = "";
 			
 			$(uploadResultArr).each(function(i,obj){
@@ -245,8 +243,6 @@
 			});
 			uploadUL.append(str);
 		}
-		
-
 		function showImage(fileCallPath) {
 		    alert(fileCallPath);
 		    $(".bigPictureWrapper").css("display", "flex").show();
@@ -261,11 +257,6 @@
 				$('.bigPictureWrapper').hide();
 			},1000);
 		});
-		
-		
-		
-		
-		
 	});
 </script>
 
@@ -357,8 +348,6 @@
 							</div>
 						</div>
 					</div>
-			                    
-                    
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-6 -->
