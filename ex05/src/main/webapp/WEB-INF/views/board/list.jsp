@@ -62,8 +62,6 @@
 			
 			searchForm.submit();
 		})
-		
-		
 	});
 	
 </script>
