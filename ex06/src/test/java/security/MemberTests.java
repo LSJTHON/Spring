@@ -51,7 +51,7 @@ public class MemberTests {
 //					pstmt.setString(1,"manager"+i);
 //					pstmt.setString(3,"운영자"+i);
 //				}else {
-//					pstmt.setString(1, "manager"+i);
+//					pstmt.setString(1, "admin"+i);
 //					pstmt.setString(3,"관리자"+i);
 //				}
 //				pstmt.executeUpdate();
@@ -83,7 +83,7 @@ public class MemberTests {
 					pstmt.setString(1,"manager"+i);
 					pstmt.setString(2,"ROLE_MEMBER");
 				}else {
-					pstmt.setString(1, "manager"+i);
+					pstmt.setString(1, "admin"+i);
 					pstmt.setString(2,"ROLE_ADMIN");
 				}
 				pstmt.executeUpdate();
@@ -96,3 +96,4 @@ public class MemberTests {
 		}
 	}
 }
+
